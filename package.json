@@ -1,0 +1,19 @@
+{
+  "name": "website-scraper-to-excel",
+  "version": "0.0.1",
+  "description": "A lightweight, open-source web scraper built with Node.js and Cheerio that extracts website prices and saves it in Excel format",
+  "main": "index.mjs",
+  "scripts": {
+    "start": "node index.mjs"
+  },
+  "author": "drg_iulian",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.7.7",
+    "cheerio": "^1.0.0",
+    "consola": "^3.2.3",
+    "exceljs": "^4.4.0",
+    "nanoid": "^5.0.8",
+    "node-schedule": "^2.1.1"
+  }
+}

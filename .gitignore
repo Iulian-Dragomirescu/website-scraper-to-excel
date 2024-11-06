@@ -128,3 +128,9 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# Export 
+/public/export/*.xlsx
+
+#  Input
+/public/input/test-*.json
