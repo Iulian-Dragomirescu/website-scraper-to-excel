@@ -1,0 +1,8 @@
+services:
+  app:
+    restart: always
+    volumes:
+      - /your_path:/app/public/export
+    build:
+      context: .
+      dockerfile: DockerFile
