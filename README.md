@@ -54,10 +54,18 @@ This is an open-source web scraper built with Node.js and Cheerio, specifically 
    pm2 start ecosystem.config.cjs
    ```
 
-1. With `Docker:`
+2. With `Docker:`
+
+   **2.1** Update the Volume Path
+
+   In the `docker-compose.yml` file, update the volumes section to specify the local path where the Excel files will be saved. Replace `/your_path` with the desired directory on your machine:
+
+   **2.2**. Build and Run the Docker Container
+
+   Execute the following command to build and start the Docker container:
 
    ```bash
-   docker-compose up -d
+   docker compose -f "docker-compose.yml" up -d --build
    ```
 
 ## Project Structure
