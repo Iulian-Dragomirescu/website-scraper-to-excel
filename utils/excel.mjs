@@ -71,7 +71,6 @@ export const toExcel = async ({ data = [], options }) => {
   // Add data to the worksheet
   data.forEach((item) => {
     const rowValues = headers.map((header) => item[header]);
-    console.log("🚀 ~ data.forEach ~ rowValues:", rowValues);
     worksheet.addRow(rowValues);
   });
 
