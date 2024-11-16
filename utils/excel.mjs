@@ -42,6 +42,10 @@ const reduceOpacity = (hexColor, opacity) => {
   return newHex;
 };
 
+const onlyUnique = (value, index, array) => {
+  return array.indexOf(value) === index;
+};
+
 export const toExcel = async ({ data = [], options }) => {
   // Sort the data alphabetically based on the 'name' column
   const sortByColumn = "name";
@@ -52,8 +56,16 @@ export const toExcel = async ({ data = [], options }) => {
   const workbook = new ExcelJS.Workbook();
   const worksheet = workbook.addWorksheet("Sheet 1");
 
+  // Get all keys from the products
+  const keys = [];
+
+  data.map((e) => {
+    Object.keys(e).map((y) => keys.push(y));
+  });
+
+  const headers = keys.filter(onlyUnique);
+
   // Add headers to the worksheet
-  const headers = Object.keys(data[0]); // Assuming the data is an array of objects
   worksheet.addRow(headers);
 
   // Add data to the worksheet
