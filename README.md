@@ -159,7 +159,7 @@ export const options = {
 
 1.  Add `email` object in `scraper.config.mjs` with your email configuration.
 
-    ```
+    ```javascript
       email: {
         enabled: true,
         from: 'DevCodes"<noreply@devcodes.ro>',
