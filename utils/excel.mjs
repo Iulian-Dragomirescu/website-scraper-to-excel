@@ -123,6 +123,7 @@ export const toExcel = async ({ data = [], options }) => {
     "ro-RO"
   )}-${nanoid(6)}.xlsx`;
 
+  // Save file to local machine
   fs.writeFile(publicDir + fileName, fileBuffer, (err) => {
     if (err) {
       logger.error("Error writing file:", err);
@@ -130,4 +131,9 @@ export const toExcel = async ({ data = [], options }) => {
       logger.success(`File successfully saved as: "${fileName}"`);
     }
   });
+
+  return {
+    fileName,
+    fileBuffer,
+  };
 };
