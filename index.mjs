@@ -1,7 +1,9 @@
+import "dotenv/config";
 import { scheduleJob } from "node-schedule";
 import { options } from "./scraper.config.mjs";
 import { toExcel } from "./utils/excel.mjs";
 import { logger } from "./utils/logger.mjs";
+import { sendMail } from "./utils/nodemailer.mjs";
 import { useProduct } from "./utils/useProduct.mjs";
 import { useScraper } from "./utils/useScraper.mjs";
 
@@ -11,7 +13,9 @@ const init = async () => {
 
     const job = scheduleJob(cron, async () => {
       const result = [];
+      const excelResults = [];
 
+      // Process scrapers
       for (let x = 0; x < products.length; x++) {
         const productsListResult = [];
         const element = products[x];
@@ -43,16 +47,30 @@ const init = async () => {
         });
       }
 
+      // Process Excel
       for (let x = 0; x < result.length; x++) {
         const { name, items } = result[x];
 
-        await toExcel({
+        const res = await toExcel({
           data: items,
           options: {
             fileName: name,
           },
         });
+
+        excelResults.push(res);
       }
+
+      // Send file to email
+      await sendMail({
+        subject: "Scraper Report",
+        attachments: excelResults.map((e) => {
+          return {
+            filename: e.fileName,
+            content: e.fileBuffer,
+          };
+        }),
+      });
     });
 
     logger.info(

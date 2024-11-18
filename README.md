@@ -4,8 +4,8 @@ This is an open-source web scraper built with Node.js and Cheerio, specifically 
 
 ## Features
 
-- Scrapes data from websites using Cheerio.
-- Outputs the scraped data to Excel files.
+- Scrape prices from websites using Cheerio.
+- Exports the scraped data to Excel files and delivers it via email for seamless access and analysis.
 - Configurable with a cron schedule (e.g., run once a day).
 - Modular scrapers: Write a new scraper for any website.
 - Simple configuration file to specify what to scrape and where to store the data.
@@ -90,6 +90,21 @@ This is an open-source web scraper built with Node.js and Cheerio, specifically 
 export const options = {
   cron: "0 0 * * *", // Run the scraper once a day at midnight
   executeOnStart: true, // Execute the scraper immediately when the app starts // @default = false
+
+  email: {
+    enabled: true,
+    from: 'DevCodes"<noreply@devcodes.ro>',
+    to: "user@example.com",
+    nodemailer: {
+      host: "smtp.example.com",
+      port: 587,
+      tls: {
+        rejectUnauthorized: true,
+        minVersion: "TLSv1.2",
+      },
+    },
+  },
+
   products: [
     {
       name: "Apple", // Name for Excel file
@@ -139,6 +154,30 @@ export const options = {
      }
    ]
    ```
+
+## Enable Email Notifications
+
+1.  Add `email` object in `scraper.config.mjs` with your email configuration.
+
+    ```
+      email: {
+        enabled: true,
+        from: 'DevCodes"<noreply@devcodes.ro>',
+        to: "user@example.com",
+        nodemailer: {
+          host: "smtp.example.com",
+          port: 587,
+          tls: {
+            rejectUnauthorized: true,
+            minVersion: "TLSv1.2",
+          },
+        },
+      },
+    ```
+
+2.  Rename `.env.exemple` to `.env` and add your USER and PASS. (You can use Amazon SES).
+
+3.  Run `npm run start` to start the application and receive email notifications when the scraping process is completed.
 
 ## Contributing
 
